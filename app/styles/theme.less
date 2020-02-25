@@ -1,0 +1,38 @@
+:root {
+  font-family: Ubuntu, sans-serif;
+  --background-color: #333;
+  --text-color: #ccc;
+  --secondary-text-color: #888;
+  --gutter-width: 1.5rem;
+  --accent-color: hsla(0, 60%, 50%, 1);
+  --in-accent-color: white;
+}
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  height: 100vh;
+  width: 100vw;
+}
+
+a[href] {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a.button, button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: var(--accent-color);
+  color: var(--in-accent-color);
+  box-sizing: border-box;
+  padding: 1em;
+  display: inline-block;
+}
+input {
+  font-family: inherit;
+}
+
+label {
+  cursor: pointer;
+}

@@ -1,0 +1,34 @@
+<form class="new-session" action="">
+  <fieldset class="players">
+    <legend>Players</legend>
+    <ul class="ladder-players">
+      {{#each this.ladderPlayersSelection as |player|}}
+        <li class="ladder-player {{if player.selected "selected" }}">
+          <label>
+            <Input @type="checkbox" @checked={{player.selected}} />
+            {{player.name}}
+          </label>
+        </li>
+      {{/each}}
+    </ul>
+  </fieldset>
+  <fieldset class="challengers">
+    <legend>Challengers</legend>
+    <ul class="challenger-players">
+      {{#each this.challengers as |challenger|}}
+      <li class="challenger-player">
+        <span>{{challenger}}</span>
+        <button>×</button>
+      </li>
+      {{/each}}
+    </ul>
+    <div class="next-challenger">
+      <Input @type="text" @value={{nextChallenger}} placeholder="Challenger name" />
+      <button>+</button>
+    </div>
+  </fieldset>
+  <div class="filler"></div>
+  <div class="actions">
+    <button type="submit">Fight!</button>
+  </div>
+</form>

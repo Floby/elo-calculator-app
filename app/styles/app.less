@@ -1,0 +1,147 @@
+@import './reset.less';
+@import './theme.less';
+
+.index {
+  height: 100%;
+  padding: var(--gutter-width);
+  padding-bottom: calc(var(--gutter-width) * 2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+
+  ul.ladder {
+    flex-grow: 1;
+  }
+  ul.ladder > li {
+    padding: .5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .score {
+      text-align: right;
+    }
+  }
+
+  .actions {
+    flex-grow: 0;
+    text-align: center;
+  }
+}
+
+.new-session {
+  height: 100%;
+  padding: var(--gutter-width);
+  padding-bottom: calc(var(--gutter-width) * 2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .line-action-button() {
+    padding: .5em .7em;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid var(--accent-color);
+    background: var(--background-color);
+    border-radius: 2px;
+    transition: 100ms ease-in-out;
+  }
+  .line-action-button-active() {
+    background: var(--accent-color);
+    color: var(--in-accent-color);
+  }
+  
+  .players, .challengers {
+    flex-grow: 0;
+    legend {
+      margin-bottom: 1em;
+      color: var(--accent-color);
+      filter: saturate(80%);
+    }
+    margin-bottom: var(--gutter-width);
+  }
+  .filler {
+    flex-grow: 1;
+  }
+  .players {
+    li.ladder-player {
+      > label {
+        position: relative;
+        display: flex;
+        padding-left: .5em;
+        margin-bottom: 1em;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        > input[type=checkbox] {
+          display: none;
+        }
+
+        &::after {
+          .line-action-button();
+          /*
+          padding: .5em .7em;
+          display: block;
+          */
+        }
+      }
+
+      > label {
+        transition: 100ms ease-in-out;
+      }
+      > label::after {
+        content: '+';
+      }
+      &.selected {
+        > label {
+          background: var(--accent-color);
+          color: var(--in-accent-color);
+        }
+        > label::after {
+          content: '×';
+          .line-action-button-active();
+        }
+      }
+    }
+  }
+
+  .challengers {
+    .line() {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1em;
+      button {
+        .line-action-button();
+      }
+    }
+    .challenger-player {
+      .line();
+      padding-left: .5em;
+      background: var(--accent-color);
+      color: var(--in-accent-color);
+      button {
+        .line-action-button-active();
+      }
+    }
+    .next-challenger {
+      .line();
+      input {
+        flex-grow: 1;
+        padding: .7em;
+        margin-right: 1em;
+        border: 1px solid var(--secondary-text-color);
+        background: var(--background-color);
+        color: var(--text-color);
+      }
+    }
+  }
+
+  .actions {
+    flex-grow: 0;
+    text-align: center;
+  }
+}

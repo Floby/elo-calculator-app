@@ -1,0 +1,17 @@
+<section class="index">
+  <ul class="ladder">
+    {{#each this.model as |player|}}
+      <li>
+        <span class="name">
+          {{player.name}}
+        </span>
+        <span class="score">
+          {{player.elo}}
+        </span>
+      </li>
+    {{/each}}
+  </ul>
+  <div class="actions">
+    <LinkTo @route="new-session" class="button">Start Session</LinkTo>
+  </div>
+</section>
