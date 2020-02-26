@@ -15,18 +15,34 @@ export default class SessionService extends Service {
     return session
   }
 
+  save (session) {
+    if (!this.store.has(session.id)) {
+      throw Error('Session must already exist')
+    }
+    this.store.set(session.id, session)
+  }
+
   get (id) {
     const json = this.store.get(id)
-    const { players } = json
-    return new Session ({ id, players })
+    const { players, winners } = json
+    return new Session ({ id, players, winners })
   }
 }
 
 class Session {
   id = null
   players = []
-  constructor ({ id, players }) {
+  winners = []
+  constructor ({ id, players, winners }) {
     this.id = id
     this.players = [...players]
+    this.winners = winners || []
+  }
+
+  addWinner (winner) {
+    if (!this.players.includes(winner)) {
+      throw Error('Winner must be amongst players')
+    }
+    this.winners.push(winner)
   }
 }
