@@ -1,34 +1,47 @@
-<form class="new-session" action="">
-  <fieldset class="players">
-    <legend>Players</legend>
-    <ul class="ladder-players">
-      {{#each this.ladderPlayersSelection as |player|}}
+<div class="new-session">
+  <header>
+    New Session
+  </header>
+  <main>
+    <fieldset class="players">
+      <legend>Players</legend>
+      <ul class="ladder-players">
+        {{#each this.ladderPlayersSelection as |player|}}
         <li class="ladder-player {{if player.selected "selected" }}">
           <label>
             <Input @type="checkbox" @checked={{player.selected}} />
             {{player.name}}
           </label>
         </li>
-      {{/each}}
-    </ul>
-  </fieldset>
-  <fieldset class="challengers">
-    <legend>Challengers</legend>
-    <ul class="challenger-players">
-      {{#each this.challengers as |challenger|}}
-      <li class="challenger-player">
-        <span>{{challenger}}</span>
-        <button>×</button>
-      </li>
-      {{/each}}
-    </ul>
-    <div class="next-challenger">
-      <Input @type="text" @value={{nextChallenger}} placeholder="Challenger name" />
-      <button>+</button>
-    </div>
-  </fieldset>
-  <div class="filler"></div>
-  <div class="actions">
-    <button type="submit">Fight!</button>
-  </div>
-</form>
+        {{/each}}
+      </ul>
+    </fieldset>
+    <fieldset class="challengers">
+      <legend>Challengers</legend>
+      <ul class="challenger-players">
+        {{#each this.challengers as |challenger|}}
+        <li class="challenger-player" {{on 'click' (fn this.removeChallenger challenger)}}>
+          <span>{{challenger}}</span>
+          <button type="button" {{on 'click' (fn this.removeChallenger challenger)}}>×</button>
+        </li>
+        {{/each}}
+      </ul>
+      <form class="next-challenger" {{on 'submit' this.addChallenger}} autocomplete="off">
+        <Input @type="text" @value={{this.nextChallenger}} placeholder="Challenger name" autocomplete="off" />
+        <button type="submit">+</button>
+      </form>
+    </fieldset>
+  </main>
+  <footer>
+    <form class="actions" {{on 'submit' this.createSession}}>
+      <button type="submit">Fight!</button>
+      <p class="session-players">
+        {{#if this.sessionPlayerList}}
+          Between {{ this.sessionPlayerList }}
+        {{else}}
+          &nbsp;
+        {{/if}}
+      </p>
+    </form>
+  </footer>
+</div>

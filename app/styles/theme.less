@@ -6,6 +6,7 @@
   --gutter-width: 1.5rem;
   --accent-color: hsla(0, 60%, 50%, 1);
   --in-accent-color: white;
+  --base-border-radius: 2px;
 }
 body {
   background: var(--background-color);
@@ -28,6 +29,7 @@ a.button, button {
   box-sizing: border-box;
   padding: 1em;
   display: inline-block;
+  border-radius: var(--base-border-radius);
 }
 input {
   font-family: inherit;
@@ -36,3 +38,56 @@ input {
 label {
   cursor: pointer;
 }
+
+.full-page() {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  header {
+    flex-grow: 0;
+    background: var(--accent-color);
+    font-size: 120%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  main {
+    flex-grow: 1;
+    padding: var(--gutter-width);
+    padding-bottom: calc(var(--gutter-width) * 2);
+    box-sizing: border-box;
+  }
+
+  footer {
+    flex-grow: 0;
+  }
+}
+
+.line() {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: .5em;
+  margin-bottom: 1em;
+  border-radius: var(--base-border-radius);
+  button {
+    .line-action-button();
+  }
+}
+.line-action-button() {
+  padding: .5em .7em;
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid var(--accent-color);
+  background: var(--background-color);
+  border-radius: var(--base-border-radius);
+  transition: 100ms ease-in-out;
+}
+.line-action-button-active() {
+  background: var(--accent-color);
+  color: var(--in-accent-color);
+}
+

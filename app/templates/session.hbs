@@ -1,1 +1,28 @@
-{{outlet}}
+<form class="session" {{on 'submit' this.saveGame }}>
+  <header>
+    Fight!
+  </header>
+  <main>
+    <fieldset class="players">
+      <legend>Winner</legend>
+      <ul class="ladder-players">
+        {{#each this.players as |player|}}
+        <li class="ladder-player {{if player.selected "selected" }}">
+          <label>
+            <input type="radio" name="winner" 
+                  value={{player.selected}}
+                  {{on 'change' (fn this.selectWinner player.name)}}/>
+            {{player.name}}
+          </label>
+        </li>
+        {{/each}}
+      </ul>
+    </fieldset>
+  </main>
+  <footer>
+    <div class="actions">
+      <button type="submit">Save</button>
+    </div>
+  </footer>
+</form>
+

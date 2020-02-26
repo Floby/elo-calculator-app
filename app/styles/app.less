@@ -31,29 +31,8 @@
 }
 
 .new-session {
-  height: 100%;
-  padding: var(--gutter-width);
-  padding-bottom: calc(var(--gutter-width) * 2);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-
-  .line-action-button() {
-    padding: .5em .7em;
-    display: inline-block;
-    box-sizing: border-box;
-    border: 1px solid var(--accent-color);
-    background: var(--background-color);
-    border-radius: 2px;
-    transition: 100ms ease-in-out;
-  }
-  .line-action-button-active() {
-    background: var(--accent-color);
-    color: var(--in-accent-color);
-  }
-  
+  .full-page();
   .players, .challengers {
-    flex-grow: 0;
     legend {
       margin-bottom: 1em;
       color: var(--accent-color);
@@ -61,39 +40,23 @@
     }
     margin-bottom: var(--gutter-width);
   }
-  .filler {
-    flex-grow: 1;
-  }
   .players {
     li.ladder-player {
       > label {
+        .line();
         position: relative;
-        display: flex;
-        padding-left: .5em;
-        margin-bottom: 1em;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        transition: 100ms ease-in-out;
 
         > input[type=checkbox] {
           display: none;
         }
 
         &::after {
+          content: '+';
           .line-action-button();
-          /*
-          padding: .5em .7em;
-          display: block;
-          */
         }
       }
 
-      > label {
-        transition: 100ms ease-in-out;
-      }
-      > label::after {
-        content: '+';
-      }
       &.selected {
         > label {
           background: var(--accent-color);
@@ -108,19 +71,8 @@
   }
 
   .challengers {
-    .line() {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1em;
-      button {
-        .line-action-button();
-      }
-    }
     .challenger-player {
       .line();
-      padding-left: .5em;
       background: var(--accent-color);
       color: var(--in-accent-color);
       button {
@@ -129,6 +81,7 @@
     }
     .next-challenger {
       .line();
+      padding-left: 0;
       input {
         flex-grow: 1;
         padding: .7em;
@@ -141,7 +94,58 @@
   }
 
   .actions {
-    flex-grow: 0;
     text-align: center;
+    padding: calc(var(--gutter-width) * 2) 0;
+    .session-players {
+      color: var(--accent-color);
+      font-size: 80%;
+      margin-top: .5rem;
+    }
   }
+}
+
+.session {
+  .full-page();
+
+  .players {
+    margin-bottom: var(--gutter-width);
+    legend {
+      margin-bottom: 1em;
+      color: var(--accent-color);
+      filter: saturate(80%);
+    }
+    li.ladder-player {
+      > label {
+        .line();
+        position: relative;
+        transition: 100ms ease-in-out;
+
+        > input[type=radio] {
+          display: none;
+        }
+
+        &::after {
+          content: '☆';
+          .line-action-button();
+        }
+      }
+
+      &.selected {
+        > label {
+          background: var(--accent-color);
+          color: var(--in-accent-color);
+        }
+        > label::after {
+          content: '★';
+          .line-action-button-active();
+        }
+      }
+    }
+  }
+
+  .actions {
+    text-align: center;
+    padding: calc(var(--gutter-width) * 2) 0;
+  }
+
 }

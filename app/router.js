@@ -7,6 +7,6 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
-  this.route('session');
-  this.route('new-session');
+  this.route('session', { path: 'sessions/:session_id' })
+  this.route('new-session')
 })
