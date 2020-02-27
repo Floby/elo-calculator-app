@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 :root {
-  font-family: Ubuntu, sans-serif;
+  --regular-font: Ubuntu, sans-serif;
+  --special-font: 'Press Start 2P', Ubuntu, sans-serif;
   --background-color: #333;
   --text-color: #ccc;
   --secondary-text-color: #888;
@@ -10,6 +12,8 @@
 }
 body {
   background: var(--background-color);
+  font-family: var(--special-font);
+  font-size: 14px;
   color: var(--text-color);
   height: 100vh;
   width: 100vw;
@@ -56,6 +60,7 @@ label {
 
 
     a.back {
+      font-family: var(--regular-font);
       position: absolute;
       display: block;
       justify-content: center;
@@ -79,6 +84,7 @@ label {
 
   footer {
     flex-grow: 0;
+    padding: calc(var(--gutter-width) * 2) 0;
   }
 }
 
@@ -96,6 +102,7 @@ label {
 }
 .line-action-button() {
   padding: .5em .7em;
+  font-family: var(--regular-font);
   display: inline-block;
   box-sizing: border-box;
   border: 1px solid var(--accent-color);
