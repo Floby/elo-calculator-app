@@ -1,17 +1,24 @@
 <section class="index">
-  <ul class="ladder">
-    {{#each this.model as |player|}}
-      <li>
-        <span class="name">
-          {{player.name}}
-        </span>
-        <span class="score">
-          {{player.elo}}
-        </span>
-      </li>
-    {{/each}}
-  </ul>
-  <div class="actions">
-    <LinkTo @route="new-session" class="button">Start Session</LinkTo>
-  </div>
+  <header>
+    <h1>Ladder</h1>
+  </header>
+  <main>
+    <ul class="ladder">
+      {{#each this.model as |player|}}
+        <li>
+          <span class="name">
+            {{player.name}}
+          </span>
+          <span class="score">
+            {{player.elo}}
+          </span>
+        </li>
+      {{/each}}
+    </ul>
+  </main>
+  <footer>
+    <div class="actions">
+      <LinkTo @route="new-session" class="button">Start Session</LinkTo>
+    </div>
+  </footer>
 </section>

@@ -47,10 +47,27 @@ label {
 
   header {
     flex-grow: 0;
+    box-sizing: border-box;
     background: var(--accent-color);
-    font-size: 120%;
-    text-align: center;
     padding: 1rem 0;
+    position: relative;
+    text-align: center;
+    font-size: 120%;
+
+
+    a.back {
+      position: absolute;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      left: 0;
+      top: 0;
+      padding-top: .2em;
+      height: calc(100% - .2em);
+      width: 3rem;
+      color: var(--in-accent-color);
+      font-size: 2rem;
+    }
   }
 
   main {
