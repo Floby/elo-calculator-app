@@ -25,7 +25,7 @@ export default class SessionController extends Controller {
   @action
   async saveGame (e) {
     e.preventDefault()
-    await this.ladder.saveGame(this.model.players, this.winner)
+    await this.ladder.saveGame(this.model.players, this.winner, this.model.id)
     this.model.addWinner(this.winner)
     this.session.save(this.model)
     this.winner = undefined
