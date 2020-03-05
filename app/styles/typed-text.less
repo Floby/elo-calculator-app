@@ -1,0 +1,13 @@
+.typed-text-container {
+  > .letter {
+    animation: typed-text-fade-in 5ms linear;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--index) * var(--typing-speed) + var(--typing-delay));
+  }
+}
+
+@keyframes typed-text-fade-in {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}

@@ -1,0 +1,3 @@
+<span class="typed-text-container" {{css-var typing-speed=this.typingSpeed typing-delay=this.typingDelay}} {{did-insert this.startWatch}} {{will-destroy this.stopWatch}}>
+  {{#each this.letters as |letter index|}}<span class="letter" {{css-var index=index }}>{{letter}}</span>{{/each}}
+</span>

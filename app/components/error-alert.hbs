@@ -1,0 +1,6 @@
+<div class="error-alert-overlay" data-quitting={{this.acknowledged}}
+     {{on 'click' this.acknowledgeError}}
+     />
+<aside class="error-alert" data-quitting={{this.acknowledged}} {{on 'click' this.acknowledgeError}}>
+  {{yield}}
+</aside>

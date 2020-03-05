@@ -23,9 +23,11 @@
       <legend>Challengers</legend>
       <ul class="challenger-players">
         {{#each this.challengers as |challenger|}}
-        <li class="challenger-player" {{on 'click' (fn this.removeChallenger challenger)}}>
-          <span>{{challenger}}</span>
-          <button type="button" {{on 'click' (fn this.removeChallenger challenger)}}>×</button>
+        <li class="challenger-player">
+          <label {{on 'click' (fn this.removeChallenger challenger)}}>
+            <span>{{challenger}}</span>
+            <button type="button" {{on 'click' (fn this.removeChallenger challenger)}}>×</button>
+          </label>
         </li>
         {{/each}}
       </ul>
@@ -34,10 +36,15 @@
         <button type="submit">+</button>
       </form>
     </fieldset>
+    {{#if this.hasError}}
+    <ErrorAlert @onAcknowledged={{this.getPastError}}>
+      <TypedText @text={{this.error}} @delay={{100}} />
+    </ErrorAlert>
+    {{/if}}
   </main>
   <footer>
     <form class="actions" {{on 'submit' this.createSession}}>
-      <button type="submit">Fight!</button>
+      <button type="submit" disabled={{not this.readyToFight}}>Fight!</button>
       <p class="session-players">
         {{#if this.sessionPlayerList}}
           Between {{ this.sessionPlayerList }}

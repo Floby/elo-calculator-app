@@ -11,6 +11,7 @@ export default class NewSessionController extends Controller {
   @tracked ladderPlayersSelection
   @tracked challengers = []
   @tracked nextChallenger
+  @tracked error
 
   initialize () {
     this.challengers = A([])
@@ -36,6 +37,23 @@ export default class NewSessionController extends Controller {
     return `${others.join(', ')} and ${last}`
   }
 
+  get readyToFight () {
+    return this.sessionPlayers.length >= 2 && !this.hasError
+  }
+
+  get hasError () {
+    return Boolean(this.error)
+  }
+
+  checkAlreadyPresent (name) {
+    if (this.model.some((player) => name === player)) {
+      throw Error(`"${name}" already exists. Choose another name`)
+    }
+    if (this.challengers.some((player) => name === player)) {
+      throw Error(`"${name}" already exists. Choose another name`)
+    }
+  }
+
   @action
   removeChallenger (challenger) {
     this.challengers = this.challengers.filter((c) => c !== challenger)
@@ -46,9 +64,13 @@ export default class NewSessionController extends Controller {
     e.preventDefault()
     const challenger = this.nextChallenger && this.nextChallenger.trim()
     if (!challenger) return
-    this.challengers.pushObject(challenger)
-    this.nextChallenger = undefined
-    return false
+    try {
+      this.checkAlreadyPresent(challenger)
+      this.challengers.pushObject(challenger)
+      this.nextChallenger = undefined
+    } catch (e) {
+      this.error = e.message
+    }
   }
 
   @action
@@ -57,5 +79,10 @@ export default class NewSessionController extends Controller {
     const players = this.sessionPlayers
     const session = this.session.create(players)
     return this.router.transitionTo('session', session)
+  }
+
+  @action
+  getPastError () {
+    this.error = undefined
   }
 }
