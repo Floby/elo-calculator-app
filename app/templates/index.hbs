@@ -15,6 +15,9 @@
         </li>
       {{/each}}
     </ul>
+    {{#unless this.model.length}}
+      <p class="empty">There are no known players at this point</p>
+    {{/unless}}
   </main>
   <footer>
     <div class="actions">
