@@ -7,20 +7,20 @@
   </header>
   <main>
     <fieldset class="players">
-      <legend>Players</legend>
+      <legend><TypedText @text="Players" /></legend>
       <ul class="ladder-players">
         {{#each this.ladderPlayersSelection as |player|}}
         <li class="ladder-player {{if player.selected "selected" }}">
           <label>
             <Input @type="checkbox" @checked={{player.selected}} />
-            {{player.name}}
+            <TypedText @text={{player.name}} />
           </label>
         </li>
         {{/each}}
       </ul>
     </fieldset>
     <fieldset class="challengers">
-      <legend>Challengers</legend>
+      <legend><TypedText @text="Challengers" /></legend>
       <ul class="challenger-players">
         {{#each this.challengers as |challenger|}}
         <li class="challenger-player">
@@ -32,8 +32,8 @@
         {{/each}}
       </ul>
       <form class="next-challenger" {{on 'submit' this.addChallenger}} autocomplete="off">
-        <Input @type="text" @value={{this.nextChallenger}} placeholder="Challenger name" autocomplete="off" />
-        <button type="submit">+</button>
+        <Input @type="text" @value={{this.nextChallenger}} placeholder="Challenger name" autocomplete="off" {{typed-element}}/>
+        <button type="submit" {{typed-element}}>+</button>
       </form>
     </fieldset>
     {{#if this.hasError}}
@@ -44,7 +44,7 @@
   </main>
   <footer>
     <form class="actions" {{on 'submit' this.createSession}}>
-      <button type="submit" disabled={{not this.readyToFight}}>Fight!</button>
+      <button type="submit" disabled={{not this.readyToFight}}><TypedText @text="Fight!" /></button>
       <p class="session-players">
         {{#if this.sessionPlayerList}}
           Between {{ this.sessionPlayerList }}

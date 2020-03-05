@@ -5,6 +5,12 @@
     animation-fill-mode: forwards;
     animation-delay: calc(var(--index) * var(--typing-speed) + var(--typing-delay));
   }
+  &[data-locked] {
+    > .letter {
+      opacity: 0;
+      animation: none;
+    }
+  }
 }
 
 @keyframes typed-text-fade-in {

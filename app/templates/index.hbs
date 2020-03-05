@@ -7,10 +7,10 @@
       {{#each this.model as |player|}}
         <li>
           <span class="name">
-            {{player.name}}
+            <TypedText @text={{player.name}}/>
           </span>
           <span class="score">
-            {{player.elo}}
+            <TypedText @text={{player.elo}} />
           </span>
         </li>
       {{/each}}

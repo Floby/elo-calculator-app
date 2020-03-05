@@ -1,10 +1,22 @@
+import delay from 'delay'
 import { computed, action } from '@ember/object'
+import { inject as service } from '@ember/service'
+import { tracked } from '@glimmer/tracking'
 import Component from '@glimmer/component'
 
 export default class TypedTextComponent extends Component {
+  @service lock
+
+  @tracked locked = true
+
   @computed('args.text')
   get letters () {
-    return this.args.text.split('')
+    if (this.args.text) {
+      const text = String(this.args.text)
+      return text.split('')
+    } else {
+      return []
+    }
   }
 
   get typingSpeed () {
@@ -36,15 +48,18 @@ export default class TypedTextComponent extends Component {
   }
 
   @action
-  startWatch () {
-    this.watch = setTimeout(() => {
+  async startWatch () {
+    await this.lock.withLock('typed-text', async () => {
+      this.watch = delay(this.totalTypingMs)
+      this.locked = false
+      await this.watch
       this.args.onTyped && this.args.onTyped()
-    }, this.totalTypingMs)
+    })
   }
 
   @action
   stopWatch () {
-    clearTimeout(this.watch)
+    this.watch.clear()
     delete this.watch
   }
 }
