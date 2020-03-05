@@ -1,10 +1,11 @@
 import Ky from 'ky'
 import Service from '@ember/service'
+import ENV from 'elo-calculator-app/config/environment'
 
 export default class LadderService extends Service {
   constructor () {
     super(...arguments)
-    this.baseUrl = 'http://localhost:1337'
+    this.baseUrl = ENV.baseApiUrl
   }
 
   async currentLadder () {
