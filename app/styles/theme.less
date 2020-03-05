@@ -84,6 +84,13 @@ label {
   }
 
   main {
+    width: 100%;
+    align-self: center;
+
+    @media (min-width: 600px) {
+      width: 600px;
+    }
+
     position: relative;
     flex-grow: 1;
     padding: var(--gutter-width);
